@@ -1,1 +1,8 @@
 ZSH configuration with supports Ruby, Rails and many other features
+
+To use this configuration run following commands:
+
+$ git clone git://github.com/akolosov/zsh-config.git ~/.zsh
+$ ln -s ~/.zsh/rc.zsh ~/.zshrc
+$ zsh
+
