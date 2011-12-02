@@ -31,6 +31,15 @@ done
 # Load all of your custom configurations from custom/
 for config_file ($ZSH_CUSTOM/*.zsh) source $config_file
 
+### colored filenames with ls
+if [[ -x $(which dircolors) ]] ; then
+    if [[ ${TERM} == screen* ]] ; then
+        eval $( TERM=screen dircolors $ZSH/dircolors.zsh )
+    else
+        eval $( dircolors $ZSH/dircolors.zsh )
+    fi
+fi
+
 # Load the theme
 if [ "$ZSH_THEME" = "random" ]
 then
