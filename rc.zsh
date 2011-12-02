@@ -4,6 +4,10 @@ ZSH=$HOME/.zsh
 # Set name of the theme to load.
 ZSH_THEME="afowler"
 
+if [ "$VENDOR" = "unknown" ]; then
+  VENDOR="pc"
+fi
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -15,6 +19,9 @@ ZSH_THEME="afowler"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
+
+# Use zkbd extension
+USE_ZKBD="false"
 
 # Which plugins would you like to load? (plugins can be found in ~/.zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
