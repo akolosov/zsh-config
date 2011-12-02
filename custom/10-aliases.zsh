@@ -1,18 +1,4 @@
 # my aliases
-alias apt-get='sudo apt-get '
-alias apt='sudo apt-get '
-alias apt-install='sudo apt-get install '
-alias a-i='sudo apt-get install '
-alias apt-remove='sudo apt-get remove '
-alias a-r='sudo apt-get remove '
-alias apt-search='sudo apt-cache search '
-alias a-s='sudo apt-cache search '
-alias apt-show='sudo apt-cache show '
-alias a-h='sudo apt-cache show '
-alias apt-update='sudo apt-get update '
-alias a-d='sudo apt-get update '
-alias apt-upgrade='sudo apt-get upgrade '
-alias a-g='sudo apt-get upgrade '
 
 alias unicorn-start='unicorn_rails -c /var/lib/nginx/www/app/config/unicorn.rb -D'
 alias unicorn-stop='kill -9 `cat /var/lib/nginx/www/app/tmp/unicorn.pid`'
