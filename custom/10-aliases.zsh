@@ -14,4 +14,3 @@ fi
 if [ $HOST = 'YODA' ]; then
     alias eve-online='env WINEARCH=win32 env WINEPREFIX="/home/hunter/.wine" env LIBGL_DRIVERS_PATH=/usr/lib32/dri  LD_PRELOAD=/usr/lib32/fglrx/libGL.so.1 wine  explorer /desktop=EVE1,1600x900  C:\\Games\\EVE\\bin\\ExeFile.exe /END /LUA:OFF &>~/eve-messages'
 fi
-

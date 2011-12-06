@@ -25,7 +25,7 @@ USE_ZKBD="false"
 
 # Which plugins would you like to load? (plugins can be found in ~/.zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git github rails3 debian ruby rvm bundler gem)
+plugins=(git github rails3 debian ruby rvm bundler gem extract)
 
 source $ZSH/configure.zsh
 
