@@ -12,6 +12,4 @@ elif [ $HOST = "YODA" ]; then
     export no_proxy=$(echo $no_proxy | sed 's/,$//')
 fi
 
-export MOZILLA_FIVE_HOME=/usr/lib/firefox-7.0.1
-
 export REALLY_GEM_UPDATE_SYSTEM='yes'

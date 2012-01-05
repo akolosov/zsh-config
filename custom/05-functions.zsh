@@ -8,7 +8,7 @@ function rvm-noglobal () {
 
 function newproject () {
     [ -z $1 ] && exit 0
-    cd ~/Проекты
+    cd ~/Projects
     mkdir $1
     cd $1
     kate &>/dev/null &
@@ -17,7 +17,7 @@ function newproject () {
 
 function goproject () {
     [ -z $1 ] && exit 0
-    cd ~/Проекты/$1
+    cd ~/Projects/$1
     kate &>/dev/null &
     exit 0
 }
