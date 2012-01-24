@@ -1,0 +1,13 @@
+#!/bin/sh
+
+filename="../git-extras.plugin.zsh"
+
+echo "#!/bin/zsh " > $filename
+for f in `ls -1|grep -v make-plugin`; do
+  echo "$f() {" >> $filename
+  cat $f | sed 's/#!\/bin\/sh//' >> $filename
+  echo ""  >> $filename
+  echo "}" >> $filename
+  echo ""  >> $filename
+  echo ""  >> $filename
+done

@@ -1,0 +1,24 @@
+#!/bin/sh
+
+COMMITISH=""
+test $# -ne 0 && COMMITISH=$@
+project=${PWD##*/}
+commit_count=`git log --oneline $COMMITISH | wc -l | tr -d ' '`
+file_count=`git ls-files | wc -l | tr -d ' '`
+authors=`git shortlog -n -s $COMMITISH | awk '
+  { args[NR] = $0; sum += $0 }
+  END {
+    for (i = 1; i <= NR; ++i) {
+      printf "%-30s %2.1f%%\n", args[i], 100 * args[i] / sum
+    }
+  }'`
+
+echo
+echo " project: $project"
+echo " commits: $commit_count"
+if test "$COMMITISH" = ""; then
+    echo " files  : $file_count"
+fi
+echo " authors: "
+echo "$authors"
+echo
