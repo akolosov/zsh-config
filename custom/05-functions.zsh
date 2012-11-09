@@ -11,14 +11,14 @@ function newproject () {
     cd ~/Projects
     mkdir $1
     cd $1
-    kate &>/dev/null &
+    sublime_text &>/dev/null &
     exit 0
 }
 
 function goproject () {
     [ -z $1 ] && exit 0
     cd ~/Projects/$1
-    kate &>/dev/null &
+    sublime_text &>/dev/null &
     exit 0
 }
 
