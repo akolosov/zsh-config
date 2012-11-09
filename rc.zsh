@@ -3,6 +3,7 @@ ZSH=$HOME/.zsh
 
 # Set name of the theme to load.
 ZSH_THEME="afowler"
+# ZSH_THEME="rkj-repos"
 
 if [ "$VENDOR" = "unknown" ]; then
   VENDOR="pc"
