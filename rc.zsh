@@ -31,3 +31,5 @@ plugins=(git github git-extras rails3 debian ruby rvm rake bundler gem extract k
 source $ZSH/configure.zsh
 
 # Customize to your needs...
+
+PATH=$PATH:/usr/local/rvm/bin # Add RVM to PATH for scripting
