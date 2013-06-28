@@ -3,8 +3,6 @@ ZSH=$HOME/.zsh
 
 # Set name of the theme to load.
 ZSH_THEME="crunch-mod"
-# ZSH_THEME="afowler"
-# ZSH_THEME="rkj-repos"
 
 if [ "$VENDOR" = "unknown" ]; then
   VENDOR="pc"
@@ -27,10 +25,8 @@ USE_ZKBD="false"
 
 # Which plugins would you like to load? (plugins can be found in ~/.zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git github git-extras rails3 debian ruby rvm rake bundler gem extract kate )
+plugins=(git github git-extras extract )
 
 source $ZSH/configure.zsh
 
 # Customize to your needs...
-
-PATH=$PATH:/usr/local/rvm/bin # Add RVM to PATH for scripting
