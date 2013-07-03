@@ -88,6 +88,8 @@ __git-flow-release ()
 				'start:Start a new release branch.'
 				'finish:Finish a release branch.'
 				'list:List all your release branches. (Alias to `git flow release`)'
+				'publish:Publish release branch to remote.'
+				'track:Checkout remote release branch.'
 			)
 			_describe -t commands 'git flow release' subcommands
 			_arguments \
@@ -110,8 +112,16 @@ __git-flow-release ()
 						-u'[Use the given GPG-key for the digital signature (implies -s)]'\
 						-m'[Use the given tag message]'\
 						-p'[Push to $ORIGIN after performing finish]'\
-						-k'[Keep branch after performing finish]'\
-						-n"[Don't tag this release]"\
+						':version:__git_flow_version_list'
+				;;
+
+				(publish)
+					_arguments \
+						':version:__git_flow_version_list'
+				;;
+
+				(track)
+					_arguments \
 						':version:__git_flow_version_list'
 				;;
 
@@ -164,8 +174,6 @@ __git-flow-hotfix ()
 						-u'[Use the given GPG-key for the digital signature (implies -s)]'\
 						-m'[Use the given tag message]'\
 						-p'[Push to $ORIGIN after performing finish]'\
-						-k'[Keep branch after performing finish]'\
-						-n"[Don't tag this release]"\
 						':hotfix:__git_flow_hotfix_list'
 				;;
 
@@ -195,12 +203,12 @@ __git-flow-feature ()
 				'start:Start a new feature branch.'
 				'finish:Finish a feature branch.'
 				'list:List all your feature branches. (Alias to `git flow feature`)'
-				'publish: public'
-				'track: track'
-				'diff: diff'
-				'rebase: rebase'
-				'checkout: checkout'
-				'pull: pull'
+				'publish:Publish feature branch to remote.'
+				'track:Checkout remote feature branch.'
+				'diff:Show all changes.'
+				'rebase:Rebase from integration branch.'
+				'checkout:Checkout local feature branch.'
+				'pull:Pull changes from remote.'
 			)
 			_describe -t commands 'git flow feature' subcommands
 			_arguments \
@@ -333,4 +341,4 @@ __git_command_successful () {
 	return 0
 }
 
-zstyle ':completion:*:*:git:*' user-commands flow:'description for foo'
+zstyle ':completion:*:*:git:*' user-commands flow:'provide high-level repository operations'
