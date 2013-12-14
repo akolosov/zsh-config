@@ -15,8 +15,10 @@ export REALLY_GEM_UPDATE_SYSTEM='yes'
 
 export JAVA_HOME="/usr/lib/jvm/jre1.7.0_21"
 
-export GOROOT="/usr/lib/Go"
+export GOROOT="/usr/local/go"
 
-export PATH; PATH="/opt/local/bin:$PATH:$JAVA_HOME/bin:$GOROOT/bin"
+export GOPATH="$HOME/.go"
+
+export PATH; PATH="/opt/local/bin:$PATH:$JAVA_HOME/bin:$GOROOT/bin:$GOPATH/bin"
 
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd_hbgr -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
