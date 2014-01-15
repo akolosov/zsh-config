@@ -9,6 +9,10 @@ alias gup='git fetch && git rebase'
 compdef _git gup=git-fetch
 alias gp='git push'
 compdef _git gp=git-push
+alias gpa='git push --all'
+compdef _git gpa=git-push-all
+alias gpt='git push --tags'
+compdef _git gpt=git-push-tags
 gdv() { git diff -w "$@" | view - }
 compdef _git gdv=git-diff
 alias gc='git commit -v'
