@@ -14,3 +14,8 @@ alias grmr='git push origin --delete'
 alias gta='git tag -a '
 alias grmt='git tag --delete '
 alias grmtr='git push origin :refs/tags/'
+
+alias p='ping'
+alias t='traceroute'
+alias tp='tracepath'
+
