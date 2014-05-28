@@ -22,3 +22,5 @@ export GOPATH="$HOME/.go"
 export PATH; PATH="/opt/local/bin:$PATH:$JAVA_HOME/bin:$GOROOT/bin:$GOPATH/bin"
 
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd_hbgr -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
+
+export EDITOR="/usr/bin/mcedit"
