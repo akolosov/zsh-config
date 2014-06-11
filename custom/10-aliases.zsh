@@ -16,6 +16,7 @@ alias grmt='git tag --delete '
 alias grmtr='git push origin :refs/tags/'
 alias gclr='git clone --recursive'
 alias gcl='git clone'
+alias gcad="git commit -a -m '`date +%d.%m.%Y`'"
 
 alias p='ping'
 alias t='traceroute'
