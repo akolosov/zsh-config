@@ -11,12 +11,12 @@ function createproject () {
     cd ~/Projects
     mkdir $1
     cd $1
-    subl . &
+    vim &
 }
 
 function editproject () {
     [ -z $1 ] && exit 0
     cd ~/Projects/$1
-    subl . &
+    vim &
 }
 
