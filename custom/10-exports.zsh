@@ -26,3 +26,5 @@ export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd_hbgr -Dswing.defaultlaf=
 export EDITOR="vim"
 
 export PAGER="view"
+
+export TERM="xterm-256color"
