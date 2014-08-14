@@ -17,6 +17,7 @@ alias grmtr='git push origin :refs/tags/'
 alias gclr='git clone --recursive'
 alias gcl='git clone'
 alias gcad="git commit -a -m '`date +%d.%m.%Y`'"
+alias gmp="git checkout master; git merge --no-ff develop; git push --all; git push --tags; git checkout develop"
 
 alias p='ping'
 alias t='traceroute'
