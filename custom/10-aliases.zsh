@@ -23,3 +23,5 @@ alias p='ping'
 alias t='traceroute'
 alias tp='tracepath'
 
+# diffdirs a/ b/
+alias diffdirs='diff -burN'
