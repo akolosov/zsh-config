@@ -3,7 +3,8 @@ ZSH=$HOME/.zsh
 
 # Set name of the theme to load.
 # ZSH_THEME="crunch-mod"
-ZSH_THEME="minimal"
+# ZSH_THEME="minimal"
+ZSH_THEME="agnoster"
 
 if [ "$VENDOR" = "unknown" ]; then
   VENDOR="pc"
