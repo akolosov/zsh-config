@@ -10,7 +10,7 @@ for plugin ($plugins) fpath=($ZSH/plugins/$plugin $fpath)
 
 # Load and run compinit
 autoload -U compinit
-compinit -u
+compinit -i
 
 # Set ZSH_CUSTOM to the path where your custom config files
 # and plugins exists, or else we will use the default custom/
