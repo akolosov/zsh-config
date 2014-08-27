@@ -24,7 +24,3 @@ export PATH; PATH="/usr/local/bin:/opt/local/bin:$PATH:$JAVA_HOME/bin:$GOROOT/bi
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd_hbgr -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
 
 export EDITOR="vim"
-
-export PAGER="view"
-
-# export TERM="xterm-256color"
