@@ -27,4 +27,4 @@ export EDITOR="vim"
 
 export PAGER="view"
 
-export TERM="xterm-256color"
+export TERM="konsole-256color"
