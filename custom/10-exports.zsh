@@ -11,6 +11,10 @@ if [ -f /usr/local/rvm/environments/default ]; then
     . /usr/local/rvm/environments/default
 fi
 
+if [ -f /usr/local/rvm/scripts/rvm ]; then
+    . /usr/local/rvm/scripts/rvm
+fi
+
 export REALLY_GEM_UPDATE_SYSTEM='yes'
 
 export JAVA_HOME="/usr/lib/jvm/jre1.7.0_21"
