@@ -2,8 +2,8 @@
 
 alias dbmigseed='rake db:migrate && rake db:seed'
 
-alias touchpad-off='xinput --set-prop "ETPS/2 Elantech Touchpad" "Device Enabled" 0'
-alias touchpad-on='xinput --set-prop "ETPS/2 Elantech Touchpad" "Device Enabled" 1'
+alias touchpad-off='xinput disable "ETPS/2 Elantech Touchpad"'
+alias touchpad-on='xinput enable "ETPS/2 Elantech Touchpad"'
 
 alias gcd='git checkout'
 alias gmkcd='git checkout -b'
