@@ -5,6 +5,9 @@ alias dbmigseed='rake db:migrate && rake db:seed'
 alias touchpad-off='xinput disable "ETPS/2 Elantech Touchpad"'
 alias touchpad-on='xinput enable "ETPS/2 Elantech Touchpad"'
 
+alias keyboard-off='xinput disable "AT Translated Set 2 keyboard"'
+alias keyboard-on='xinput enable "AT Translated Set 2 keyboard"'
+
 alias gcd='git checkout'
 alias gmkcd='git checkout -b'
 alias gmk='git branch'
