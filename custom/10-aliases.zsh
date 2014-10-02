@@ -8,8 +8,8 @@ alias touchpad-on='xinput enable "ETPS/2 Elantech Touchpad"'
 alias keyboard-off='xinput disable "AT Translated Set 2 keyboard"'
 alias keyboard-on='xinput enable "AT Translated Set 2 keyboard"'
 
-alias display-off='xrandr --output eDP1 --off; xrandr --output HDMI1 --on'
-alias display-on='; xrandr --output HDMI1 --off; xrandr --output eDP1 --on'
+alias display-off='xrandr --output eDP1 --off; xrandr --output HDMI1 --auto'
+alias display-on='; xrandr --output HDMI1 --off; xrandr --output eDP1 --auto'
 
 alias gcd='git checkout'
 alias gmkcd='git checkout -b'
