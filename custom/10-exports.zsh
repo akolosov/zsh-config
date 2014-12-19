@@ -1,7 +1,3 @@
-export GOROOT="/usr/local/go"
-
-export GOPATH="$HOME/.go"
-
 #RVM Config
 if [ -f /var/cache/ruby-rvm/environments/default ]; then
     . /var/cache/ruby-rvm/environments/default
@@ -29,6 +25,10 @@ fi
 
 if [ -f ~/.gvm/scripts/gvm ]; then
     . ~/.gvm/scripts/gvm
+fi
+
+if [ -f ~/.gvm_local ]; then
+	  . ~/.gvm_local
 fi
 
 export REALLY_GEM_UPDATE_SYSTEM='yes'
