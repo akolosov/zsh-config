@@ -1,399 +1,285 @@
-#!/bin/zsh 
-git-alias() {
+#compdef git
+# ------------------------------------------------------------------------------
+# Description
+# -----------
+#
+#  Completion script for git-extras (http://github.com/visionmedia/git-extras).
+#
+# ------------------------------------------------------------------------------
+# Authors
+# -------
+#
+#  * Alexis GRIMALDI (https://github.com/agrimaldi)
+#
+# ------------------------------------------------------------------------------
+# Inspirations
+# -----------
+#
+#  * git-extras (http://github.com/visionmedia/git-extras)
+#  * git-flow-completion (http://github.com/bobthecow/git-flow-completion)
+#
+# ------------------------------------------------------------------------------
 
 
-case $# in
-  0) git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort ;;
-  1) git alias | grep -e "$1" ;;
-  *) git config --global "alias.$1" "$2" ;;
-esac
-
+__git_command_successful () {
+    if (( ${#pipestatus:#0} > 0 )); then
+        _message 'not a git repository'
+        return 1
+    fi
+    return 0
 }
 
 
-git-back() {
-
-
-if test $# -eq 0; then
-  git reset --soft HEAD~1
-else
-  if `echo $1 | grep -q [^[:digit:]]`; then
-    echo $1 is not a number
-  else
-    git reset --soft HEAD~$1
-  fi
-fi
+__git_tag_names() {
+    local expl
+    declare -a tag_names
+    tag_names=(${${(f)"$(_call_program branchrefs git for-each-ref --format='"%(refname)"' refs/tags 2>/dev/null)"}#refs/tags/})
+    __git_command_successful || return
+    _wanted tag-names expl tag-name compadd $* - $tag_names
 }
 
 
-git-bug() {
-
-
-if test "$1" = "finish"; then
-  test -z $2 && echo "bug <name> required." && exit 1
-  branch=bug/$2
-  git merge --no-ff $branch && git delete-branch $branch
-else
-  test -z $1 && echo "bug <name> required." && exit 1
-  branch=bug/$1
-  git checkout -b $branch &> /dev/null
-  git checkout $branch &> /dev/null
-fi
+__git_branch_names() {
+    local expl
+    declare -a branch_names
+    branch_names=(${${(f)"$(_call_program branchrefs git for-each-ref --format='"%(refname)"' refs/heads 2>/dev/null)"}#refs/heads/})
+    __git_command_successful || return
+    _wanted branch-names expl branch-name compadd $* - $branch_names
 }
 
 
-git-changelog() {
-
-
-CHANGELOG=`ls | egrep 'change|history' -i`
-if test "$CHANGELOG" = ""; then CHANGELOG='History.md'; fi
-DATE=`date +'%Y-%m-%d'`
-HEAD="\nn.n.n / $DATE \n==================\n"
-
-if test "$1" = "--list"; then
-  version=`git for-each-ref refs/tags --sort=-authordate --format='%(refname)' \
-    --count=1 | sed 's/^refs\/tags\///'`
-  if test -z "$version"; then
-    git log --pretty="format:  * %s"
-  else
-    git log --pretty="format:  * %s" $version..
-  fi
-else
-  tmp="/tmp/changelog"
-  echo $HEAD > $tmp
-  git-changelog --list >> $tmp
-  echo '' >> $tmp
-  if [ -f $CHANGELOG ]; then cat $CHANGELOG >> $tmp; fi
-  mv $tmp $CHANGELOG
-  test -n "$EDITOR" && $EDITOR $CHANGELOG
-fi
-
+__git_feature_branch_names() {
+    local expl
+    declare -a branch_names
+    branch_names=(${${(f)"$(_call_program branchrefs git for-each-ref --format='"%(refname)"' refs/heads/feature 2>/dev/null)"}#refs/heads/feature/})
+    __git_command_successful || return
+    _wanted branch-names expl branch-name compadd $* - $branch_names
 }
 
 
-git-commits-since() {
-
-
-SINCE="last week"
-test $# -ne 0 && SINCE=$@
-echo "... commits since $SINCE" >&2
-git log --pretty='%an - %s' --after="@{$SINCE}"
+__git_refactor_branch_names() {
+    local expl
+    declare -a branch_names
+    branch_names=(${${(f)"$(_call_program branchrefs git for-each-ref --format='"%(refname)"' refs/heads/refactor 2>/dev/null)"}#refs/heads/refactor/})
+    __git_command_successful || return
+    _wanted branch-names expl branch-name compadd $* - $branch_names
 }
 
 
-git-contrib() {
-
-
-user="$*"
-
-test -z "$user" && echo "user name required." && exit 1
-
-count=`git log --oneline --pretty="format: %an" | grep "$user" | wc -l`
-test $count -eq 0 && echo "$user did not contribute." && exit 1
-git shortlog | grep "$user (" -A $count
-
+__git_bug_branch_names() {
+    local expl
+    declare -a branch_names
+    branch_names=(${${(f)"$(_call_program branchrefs git for-each-ref --format='"%(refname)"' refs/heads/bug 2>/dev/null)"}#refs/heads/bug/})
+    __git_command_successful || return
+    _wanted branch-names expl branch-name compadd $* - $branch_names
 }
 
 
-git-count() {
-
-
-if test "$1" = "--all"; then
-  git shortlog -n $@ | grep "):" | sed 's|:||'
-  echo
-fi
-
-echo total `git log --oneline | wc -l`
+__git_submodule_names() {
+    local expl
+    declare -a submodule_names
+    submodule_names=(${(f)"$(_call_program branchrefs git submodule status | awk '{print $2}')"})
+    __git_command_successful || return
+    _wanted submodule-names expl submodule-name compadd $* - $submodule_names
 }
 
 
-git-create-branch() {
-
-
-branch=$1
-test -z $branch && echo "branch required." && exit 1
-
-git push origin origin:refs/heads/$branch
-git fetch origin
-git checkout --track -b $branch origin/$branch
-git pull
-
+__git_author_names() {
+    local expl
+    declare -a author_names
+    author_names=(${(f)"$(_call_program branchrefs git log --format='%aN' | sort -u)"})
+    __git_command_successful || return
+    _wanted author-names expl author-name compadd $* - $author_names
 }
 
 
-git-delete-branch() {
-
-
-branch=$1
-test -z $branch && echo "branch required." && exit 1
-git branch -D $branch
-git branch -d -r origin/$branch && git push origin :$branch
-
+_git-changelog() {
+    _arguments \
+        '(-l --list)'{-l,--list}'[list commits]' \
 }
 
 
-git-delete-submodule() {
-
-
-submodule=$1
-
-test -z $submodule && echo "submodule required" && exit 1
-test ! -f .gitmodules && echo ".gitmodules file not found" && exit 2
-
-NAME=$(echo $submodule | sed 's/\/$//g')
-test -z $(git config --file=.gitmodules submodule.$NAME.url) && echo "submodule not found" && exit 3
-
-git config --remove-section submodule.$NAME
-git config --file=.gitmodules --remove-section submodule.$NAME
-git rm --cached $NAME
-
+_git-effort() {
+    _arguments \
+        '--above[ignore file with less than x commits]' \
 }
 
 
-git-delete-tag() {
-
-
-tagname=$1
-test -z $tagname && echo "tag required." && exit 1
-git tag -d $tagname && git push origin :refs/tags/$tagname
-
+_git-contrib() {
+    _arguments \
+        ':author:__git_author_names'
 }
 
 
-git-feature() {
-
-
-if test "$1" = "finish"; then
-  test -z $2 && echo "feature <name> required." && exit 1
-  branch=feature/$2
-  git merge --no-ff $branch && git delete-branch $branch
-else
-  test -z $1 && echo "feature <name> required." && exit 1
-  branch=feature/$1
-  git checkout -b $branch &> /dev/null
-  git checkout $branch &> /dev/null
-fi
+_git-count() {
+    _arguments \
+        '--all[detailed commit count]'
 }
 
 
-git-fresh-branch() {
-
-
-branch=$1
-
-test -z $branch && echo "branch required." && exit 1
-
-git symbolic-ref HEAD refs/heads/$branch
-rm .git/index
-git clean -fdx
-
+_git-delete-branch() {
+    _arguments \
+        ':branch-name:__git_branch_names'
 }
 
 
-git-gh-pages() {
-
-
-echo 'setting up gh-pages'
-git symbolic-ref HEAD refs/heads/gh-pages \
-  && rm .git/index \
-  && git clean -fdx \
-  && echo 'My Page' > index.html \
-  && git add . \
-  && git commit -a -m 'Initial commit' \
-  && git push -u origin gh-pages \
-  && git fetch origin \
-  && echo 'complete'
-
+_git-delete-submodule() {
+    _arguments \
+        ':submodule-name:__git_submodule_names'
 }
 
 
-git-graft() {
-
-
-src=$1
-dst=$2
-
-test -z $src && echo "source branch required." && exit 1
-
-git checkout $dst \
-  && git merge --no-ff $src \
-  && git branch -d $src
-
+_git-delete-tag() {
+    _arguments \
+        ':tag-name:__git_tag_names'
 }
 
 
-git-ignore() {
+_git-extras() {
+    local curcontext=$curcontext state line ret=1
+    declare -A opt_args
 
+    _arguments -C \
+        ': :->command' \
+        '*:: :->option-or-argument' && ret=0
 
-if test $# -eq 0; then
-  test -f .gitignore && cat .gitignore
-else
-  for pattern in $@; do
-    echo "... adding '$pattern' to .gitignore"
-    echo $pattern >> .gitignore
-  done
-fi
+    case $state in
+        (command)
+            declare -a commands
+            commands=(
+                'update:update git-extras'
+            )
+            _describe -t commands command commands && ret=0
+            ;;
+    esac
 
+    _arguments \
+        '(-v --version)'{-v,--version}'[show current version]' \
 }
 
 
-git-pull-request() {
-
-
-request=$1
-repo=${PWD##*/}
-user=`git config github.user`
-url="https://github.com/$user/$repo/pull/$request.patch"
-
-test -z "$request" && echo "pull request number required" && exit 1
-test -z "$repo" && echo "failed to detect repo" && exit 2
-test -z "$user" && echo "failed to fetch github.user" && exit 3
-
-echo "pulling $url"
-curl -# $url \
-  | git am --signoff \
-  && echo "completed pull request $request"
+_git-graft() {
+    _arguments \
+        ':src-branch-name:__git_branch_names' \
+        ':dest-branch-name:__git_branch_names'
 }
 
 
-git-refactor() {
-
-
-if test "$1" = "finish"; then
-  test -z $2 && echo "refactor <name> required." && exit 1
-  branch=refactor/$2
-  git merge --no-ff $branch && git delete-branch $branch
-else
-  test -z $1 && echo "refactor <name> required." && exit 1
-  branch=refactor/$1
-  git checkout -b $branch &> /dev/null
-  git checkout $branch &> /dev/null
-fi
+_git-squash() {
+    _arguments \
+        ':branch-name:__git_branch_names'
 }
 
 
-git-release() {
-#!/usr/bin/env sh
+_git-feature() {
+    local curcontext=$curcontext state line ret=1
+    declare -A opt_args
 
-hook() {
-  local hook=.git/hooks/$1.sh
-  if test -f $hook; then
-    echo "... $1"
-    . $hook
-  fi
-}
+    _arguments -C \
+        ': :->command' \
+        '*:: :->option-or-argument' && ret=0
 
-if test $# -gt 0; then
-  hook pre-release
-  echo "... releasing $1"
-  git commit -a -m "Release $1" \
-    && git tag $1 \
-    && git push \
-    && git push --tags \
-    && hook post-release \
-    && echo "... complete"
-else
-  echo "tag required" && exit 1
-fi
-
-}
-
-
-git-repl() {
-
-
-while true; do
-  # Readline
-  read -r -p "git> " cmd
-
-  # EOF
-  test $? -ne 0 && break
-
-  # History
-  history -s "$cmd"
-
-  # Built-in commands
-  case $cmd in
-    ls) cmd=ls-files;;
-    quit) break;;
-  esac
-
-  # Execute
-  git $cmd
-done
-
-echo
+    case $state in
+        (command)
+            declare -a commands
+            commands=(
+                'finish:merge feature into the current branch'
+            )
+            _describe -t commands command commands && ret=0
+            ;;
+        (option-or-argument)
+            curcontext=${curcontext%:*}-$line[1]:
+            case $line[1] in
+                (finish)
+                    _arguments -C \
+                        ':branch-name:__git_feature_branch_names'
+                    ;;
+            esac
+    esac
 }
 
 
-git-setup() {
+_git-refactor() {
+    local curcontext=$curcontext state line ret=1
+    declare -A opt_args
 
+    _arguments -C \
+        ': :->command' \
+        '*:: :->option-or-argument' && ret=0
 
-dir=$(test -z "$*" && echo "." || echo "$*")
-mkdir -p "$dir" \
-  && cd "$dir" \
-  && touch README \
-  && git init \
-  && git add . \
-  && git commit -m 'Initial commit'
-
+    case $state in
+        (command)
+            declare -a commands
+            commands=(
+                'finish:merge refactor into the current branch'
+            )
+            _describe -t commands command commands && ret=0
+            ;;
+        (option-or-argument)
+            curcontext=${curcontext%:*}-$line[1]:
+            case $line[1] in
+                (finish)
+                    _arguments -C \
+                        ':branch-name:__git_refactor_branch_names'
+                    ;;
+            esac
+    esac
 }
 
 
-git-summary() {
+_git-bug() {
+    local curcontext=$curcontext state line ret=1
+    declare -A opt_args
 
+    _arguments -C \
+        ': :->command' \
+        '*:: :->option-or-argument' && ret=0
 
-COMMITISH=""
-test $# -ne 0 && COMMITISH=$@
-project=${PWD##*/}
-commit_count=`git log --oneline $COMMITISH | wc -l | tr -d ' '`
-file_count=`git ls-files | wc -l | tr -d ' '`
-authors=`git shortlog -n -s $COMMITISH | awk '
-  { args[NR] = $0; sum += $0 }
-  END {
-    for (i = 1; i <= NR; ++i) {
-      printf "%-30s %2.1f%%\n", args[i], 100 * args[i] / sum
-    }
-  }'`
-
-echo
-echo " project: $project"
-echo " commits: $commit_count"
-if test "$COMMITISH" = ""; then
-    echo " files  : $file_count"
-fi
-echo " authors: "
-echo "$authors"
-echo
-
+    case $state in
+        (command)
+            declare -a commands
+            commands=(
+                'finish:merge bug into the current branch'
+            )
+            _describe -t commands command commands && ret=0
+            ;;
+        (option-or-argument)
+            curcontext=${curcontext%:*}-$line[1]:
+            case $line[1] in
+                (finish)
+                    _arguments -C \
+                        ':branch-name:__git_bug_branch_names'
+                    ;;
+            esac
+    esac
 }
 
 
-git-touch() {
-
-
-filename="$*"
-
-test -z "$filename" && echo "filename required" && exit 1
-
-touch "$filename" \
-  && git add "$filename"
-
-}
-
-
-git-undo() {
-
-
-if test $# -eq 0; then
-  git reset --hard HEAD~1
-else
-  if `echo $1 | grep -q [^[:digit:]]`; then
-    echo $1 is not a number
-  else
-    git reset --hard HEAD~$1
-  fi
-fi
-}
-
-
+zstyle ':completion:*:*:git:*' user-commands \
+    changelog:'populate changelog file with commits since the previous tag' \
+    contrib:'display author contributions' \
+    count:'count commits' \
+    delete-branch:'delete local and remote branch' \
+    delete-submodule:'delete submodule' \
+    delete-tag:'delete local and remote tag' \
+    extras:'git-extras' \
+    graft:'merge commits from source branch to destination branch' \
+    squash:'merge commits from source branch into the current one as a single commit' \
+    feature:'create a feature branch' \
+    refactor:'create a refactor branch' \
+    bug:'create a bug branch' \
+    summary:'repository summary' \
+    effort:'display effort statistics' \
+    repl:'read-eval-print-loop' \
+    commits-since:'list commits since a given date' \
+    release:'release commit with the given tag' \
+    alias:'define, search and show aliases' \
+    ignore:'add patterns to .gitignore' \
+    info:'show info about the repository' \
+    create-branch:'create local and remote branch' \
+    fresh-branch:'create empty local branch' \
+    undo:'remove the latest commit' \
+    setup:'setup a git repository' \
+    touch:'one step creation of new files' \
+    obliterate:'Completely remove a file from the repository, including past commits and tags' \
+    local-commits:'list unpushed commits on the local branch' \
