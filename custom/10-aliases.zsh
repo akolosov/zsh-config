@@ -34,3 +34,5 @@ alias tp='tracepath'
 
 # diffdirs a/ b/
 alias diffdirs='diff -burN'
+
+alias go='[ -f .gvm_local ] && . .gvm_local; go '
