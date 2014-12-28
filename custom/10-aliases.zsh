@@ -24,5 +24,6 @@ alias gmp="git checkout master; git merge --no-ff develop; git push --all; git p
 alias diffdirs='diff -burN'
 
 alias go='[ -f $PWD/.gvm_local ] && . $PWD/.gvm_local; go '
+alias goconvey='$GOPATH/bin/goconvey --cover=true --timeout=10m'
 
 alias man='vman'
