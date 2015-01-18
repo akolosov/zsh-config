@@ -1,35 +1,23 @@
 #RVM Config
-if [ -f /var/cache/ruby-rvm/environments/default ]; then
-    . /var/cache/ruby-rvm/environments/default
-fi
+[ -f /var/cache/ruby-rvm/environments/default ] && . /var/cache/ruby-rvm/environments/default
 
-if [ -f /usr/share/ruby-rvm/environments/default ]; then
-    . /usr/share/ruby-rvm/environments/default
-fi
+[ -f /usr/share/ruby-rvm/environments/default ] && . /usr/share/ruby-rvm/environments/default
 
-if [ -f /usr/local/rvm/environments/default ]; then
-    . /usr/local/rvm/environments/default
-fi
+[ -f /usr/local/rvm/environments/default ] && . /usr/local/rvm/environments/default
 
-if [ -f /usr/local/rvm/scripts/rvm ]; then
-    . /usr/local/rvm/scripts/rvm
-fi
+[ -f /usr/local/rvm/scripts/rvm ] && . /usr/local/rvm/scripts/rvm
 
-if [ -f ~/.rvm/scripts/rvm ]; then
-    . ~/.rvm/scripts/rvm
-fi
+[ -f ~/.rvm/scripts/rvm ] && . ~/.rvm/scripts/rvm
 
-if [ -f /usr/local/gvm/scripts/gvm ]; then
-    . /usr/local/gvm/scripts/gvm
-fi
+#GVM Config
+[ -f /usr/local/gvm/scripts/gvm ] && . /usr/local/gvm/scripts/gvm
 
-if [ -f ~/.gvm/scripts/gvm ]; then
-    . ~/.gvm/scripts/gvm
-fi
+[ -f ~/.gvm/scripts/gvm ] && . ~/.gvm/scripts/gvm
 
-if [ -f ~/.gvm_local ]; then
-	  . ~/.gvm_local
-fi
+[ -f ~/.gvm_local ] && . ~/.gvm_local
+
+#FZF Config
+[ -f ~/.fzf.zsh ] && . ~/.fzf.zsh
 
 export REALLY_GEM_UPDATE_SYSTEM='yes'
 
