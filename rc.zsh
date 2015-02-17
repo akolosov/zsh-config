@@ -29,6 +29,8 @@ plugins=(git github git-extras git-flow go autoenv brew brew-cask rails debian r
 
 source $ZSH/configure.zsh
 
-# Customize to your needs...
+# Add RVM to PATH for scripting
+PATH=$PATH:/usr/local/rvm/bin
 
-PATH=$PATH:/usr/local/rvm/bin # Add RVM to PATH for scripting
+#FZF config
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -16,9 +16,6 @@
 
 [ -f ~/.gvm_local ] && . ~/.gvm_local
 
-#FZF Config
-[ -f ~/.fzf.zsh ] && . ~/.fzf.zsh
-
 export REALLY_GEM_UPDATE_SYSTEM='yes'
 
 export JAVA_HOME="/usr/lib/jvm/jre1.7.0_21"
