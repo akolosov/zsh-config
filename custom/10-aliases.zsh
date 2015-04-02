@@ -21,6 +21,8 @@ alias gcad="git commit -a -m '`date +%d.%m.%Y`'"
 alias gmp="git checkout master; git merge --no-ff develop; git push --all; git push --tags; git checkout develop"
 alias gmu="git up; git co master; git mf origin/master"
 
+alias golc="find . -name '*.go'|xargs cat|wc -l"
+
 # diffdirs a/ b/
 alias diffdirs='diff -burN'
 
