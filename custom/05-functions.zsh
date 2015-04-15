@@ -27,3 +27,14 @@ vman() {
     echo "No manual entry for $*"
   fi
 }
+
+function codelinecount() {
+  [ -z $1 ] && exit 0
+  find . -name $1|xargs cat|grep -x -v '^\s*//.*$'| wc -l
+}
+
+
+function commentlinecount() {
+  [ -z $1 ] && exit 0
+  find . -name $1|xargs cat|grep -x '^\s*//.*$'| wc -l
+}
