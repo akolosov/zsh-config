@@ -2,7 +2,7 @@
 ZSH=$HOME/.zsh
 
 # Set name of the theme to load.
-ZSH_THEME="crunch-mod"
+ZSH_THEME="norm-mod"
 
 if [ "$VENDOR" = "unknown" ]; then
   VENDOR="pc"
