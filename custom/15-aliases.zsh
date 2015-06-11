@@ -24,8 +24,6 @@ alias diffdirs='diff -burN'
 
 alias go='[ -f $PWD/.gvm_local ] && . $PWD/.gvm_local; go '
 
-. ~/.gvm_local
-
 alias gb="$GOPATH/bin/gb"
 
 alias man='vman'
