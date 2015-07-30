@@ -9,7 +9,7 @@ export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd_hbgr -Dswing.defaultlaf=
 
 export EDITOR="vim"
 
-eval "$(thefuck-alias)"
+eval "$(thefuck --alias)"
 
 #VirtualEnv config
 [ -f ~/Development/Python3env/bin/activate ] && . ~/Development/Python3env/bin/activate

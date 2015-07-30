@@ -1,7 +1,5 @@
 # my aliases
 
-alias dbmigseed='rake db:migrate && rake db:seed'
-
 alias gcd='git checkout'
 alias gmkcd='git checkout -b'
 alias gmk='git branch'
@@ -25,6 +23,7 @@ alias gmur="git fetch origin && git rebase origin/master"
 alias diffdirs='diff -burN'
 
 alias go='[ -f $PWD/.gvm_local ] && . $PWD/.gvm_local; go '
-alias goconvey='$GOPATH/bin/goconvey --cover=true --timeout=10m'
+
+alias gb="$GOPATH/bin/gb"
 
 alias man='vman'
