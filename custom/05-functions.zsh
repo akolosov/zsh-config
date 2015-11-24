@@ -38,3 +38,11 @@ function commentlinecount() {
   [ -z $1 ] && exit 0
   find . -name $1|xargs cat|grep -x '^\s*//.*$'| wc -l
 }
+
+function build-module() {
+	[ -f "./VERSION" ] && VERSION=`cat ./VERSION` || VERSION="0.1"
+	BUILD=`date +%d%m%Y%H%M`
+	HOST=`whoami`@`hostname`
+
+	go build -ldflags "-X bitbucket.org/crutches-n-bikes/common/module.version=$VERSION -X bitbucket.org/crutches-n-bikes/common/module.build=$BUILD -X bitbucket.org/crutches-n-bikes/common/module.builder=$HOST" -v -a
+}

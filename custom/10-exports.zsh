@@ -12,7 +12,7 @@ export EDITOR="vim"
 eval "$(thefuck-alias)"
 
 #VirtualEnv config
-[ -f ~/Development/Python3env/bin/activate ] && . ~/Development/Python3env/bin/activate
+# [ -f ~/Development/Python3env/bin/activate ] && . ~/Development/Python3env/bin/activate
 
 #RVM Config
 [ -f /var/cache/ruby-rvm/environments/default ] && . /var/cache/ruby-rvm/environments/default
