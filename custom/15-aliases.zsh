@@ -26,4 +26,6 @@ alias go='[ -f $PWD/.gvm_local ] && . $PWD/.gvm_local; go '
 
 alias gb="$GOPATH/bin/gb"
 
+alias vim='/usr/local/bin/vim'
+
 alias man='vman'
