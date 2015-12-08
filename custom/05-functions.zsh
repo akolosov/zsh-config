@@ -46,3 +46,8 @@ function build-module() {
 
 	go build -ldflags "-X bitbucket.org/crutches-n-bikes/common/module.version=$VERSION -X bitbucket.org/crutches-n-bikes/common/module.build=$BUILD -X bitbucket.org/crutches-n-bikes/common/module.builder=$HOST" -v -a
 }
+
+function test-module() {
+	go test -cover -test.v -ginkgo.v
+}
+
