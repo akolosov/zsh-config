@@ -41,10 +41,18 @@ function commentlinecount() {
 
 function build-module() {
 	[ -f "./VERSION" ] && VERSION=`cat ./VERSION` || VERSION="0.1"
-	BUILD=`date +%d%m%Y%H%M`
+	BUILD=`date +%d.%m.%Y@%H:%M`
 	HOST=`whoami`@`hostname`
 
 	go build -ldflags "-X bitbucket.org/crutches-n-bikes/common/module.version=$VERSION -X bitbucket.org/crutches-n-bikes/common/module.build=$BUILD -X bitbucket.org/crutches-n-bikes/common/module.builder=$HOST" -v -a
+}
+
+function build-module-debug() {
+	[ -f "./VERSION" ] && VERSION=`cat ./VERSION` || VERSION="0.1"
+	BUILD=`date +%d.%m.%Y@%H:%M`
+	HOST=`whoami`@`hostname`
+
+	go build -ldflags "-X bitbucket.org/crutches-n-bikes/common/module.release=debug -X bitbucket.org/crutches-n-bikes/common/module.version=$VERSION -X bitbucket.org/crutches-n-bikes/common/module.build=$BUILD -X bitbucket.org/crutches-n-bikes/common/module.builder=$HOST" -v -a
 }
 
 function test-module() {

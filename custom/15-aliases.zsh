@@ -29,3 +29,8 @@ alias gb="$GOPATH/bin/gb"
 alias vim='/usr/local/bin/vim'
 
 alias man='vman'
+
+alias bm='build-module'
+alias bmd='build-module-debug'
+alias tm='test-module'
+
