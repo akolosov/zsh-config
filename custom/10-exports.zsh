@@ -7,11 +7,9 @@ export PATH="/usr/local/bin:/opt/local/bin:$PATH:$JAVA_HOME/bin"
 
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd_hbgr -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
 
-export EDITOR="vim"
+export EDITOR="/usr/local/bin/vim"
 
 #RVM Config
-[ -f /var/cache/ruby-rvm/environments/default ] && . /var/cache/ruby-rvm/environments/default
-
 [ -f /usr/share/ruby-rvm/environments/default ] && . /usr/share/ruby-rvm/environments/default
 
 [ -f /usr/local/rvm/environments/default ] && . /usr/local/rvm/environments/default
