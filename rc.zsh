@@ -34,3 +34,6 @@ PATH=$PATH:/usr/local/rvm/bin
 
 #FZF config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# enable xon terminal - vim Ctrl-S bug
+stty -ixon
