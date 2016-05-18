@@ -7,7 +7,7 @@ export PATH="/usr/local/bin:/opt/local/bin:$PATH:$JAVA_HOME/bin"
 
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd_hbgr -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
 
-export EDITOR="/usr/local/bin/vim -u NONE "
+export EDITOR="/usr/local/bin/vim"
 
 #GVM Config
 [ -f /usr/local/gvm/scripts/gvm ] && . /usr/local/gvm/scripts/gvm
