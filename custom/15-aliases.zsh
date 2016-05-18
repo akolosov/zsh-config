@@ -18,6 +18,7 @@ alias gcl='git clone'
 alias gcad="git commit -a -m '`date +%d.%m.%Y`'"
 alias gmp="git checkout master && git merge --no-ff develop && git push --all && git push --tags && git checkout develop"
 alias gmur="git fetch origin && git rebase origin/master"
+alias gfo="git fetch origin"
 
 # diffdirs a/ b/
 alias diffdirs='diff -burN'
