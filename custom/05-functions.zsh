@@ -49,7 +49,7 @@ function build-module() {
 	go build -ldflags "-X bitbucket.org/crutches-n-bikes/common/module.version=$VERSION -X bitbucket.org/crutches-n-bikes/common/module.build=$BUILD -X bitbucket.org/crutches-n-bikes/common/module.builder=$HOST" -v -a
 
 	if [ $? -eq 0 ]; then
-		goupx -s -u $TARGET
+		goupx --strip-binary $TARGET
 	fi
 }
 

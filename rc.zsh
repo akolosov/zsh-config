@@ -37,3 +37,5 @@ PATH=$PATH:/usr/local/rvm/bin
 
 # enable xon terminal - vim Ctrl-S bug
 stty -ixon
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
