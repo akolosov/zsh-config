@@ -25,3 +25,4 @@ export EDITOR="/usr/local/bin/vim"
 
 [ -f ~/.rvm/scripts/rvm ] && . ~/.rvm/scripts/rvm
 
+export PATH=~/.local/bin:$PATH
