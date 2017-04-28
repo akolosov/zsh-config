@@ -25,4 +25,11 @@ export EDITOR="/usr/local/bin/vim"
 
 [ -f ~/.rvm/scripts/rvm ] && . ~/.rvm/scripts/rvm
 
+
+# NVM Config
+export NVM_DIR="$HOME/.nvm"
+
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+
 export PATH=~/.local/bin:$PATH
