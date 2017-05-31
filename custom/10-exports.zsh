@@ -5,8 +5,6 @@ export JAVA_HOME="/usr/lib/jvm/jre1.7.0_21"
 
 export PATH="/usr/local/bin:/opt/local/bin:$PATH:$JAVA_HOME/bin"
 
-export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd_hbgr -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
-
 export EDITOR="/usr/local/bin/vim"
 
 #GVM Config
