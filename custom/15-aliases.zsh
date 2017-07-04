@@ -17,9 +17,10 @@ alias gclr='git clone --recursive'
 alias gcl='git clone'
 alias gcad="git commit -a -m '`date +%d.%m.%Y`'"
 alias gmp="git checkout master && git merge --no-ff develop && git push --all && git push --tags && git checkout develop"
-alias gmur="git fetch origin && git rebase origin/master"
+alias gfor="git fetch origin && git rebase origin/master"
 alias gfo="git fetch origin"
-alias gfol="git fetch origin && git pull origin"
+alias gfol="git fetch origin && git pull"
+alias gcln="git remote prune origin && git gc --auto"
 
 # diffdirs a/ b/
 alias diffdirs='diff -burN'
