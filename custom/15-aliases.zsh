@@ -21,6 +21,8 @@ alias gfor="git fetch origin && git rebase origin/master"
 alias gfo="git fetch origin"
 alias gfol="git fetch origin && git pull"
 alias gcln="git remote prune origin && git gc --auto"
+alias gpoh="git push origin HEAD"
+alias gpfoh="git push -f origin HEAD"
 
 # diffdirs a/ b/
 alias diffdirs='diff -burN'
