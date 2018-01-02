@@ -1,11 +1,3 @@
-function rvm-global () {
-    [ -z $1 ] || sudo /usr/bin/rvm use $1@global --default
-}
-
-function rvm-noglobal () {
-    [ -z $1 ] || sudo /usr/bin/rvm use $1 --default
-}
-
 function createproject () {
     [ -z $1 ] && exit 0
     cd ~/Projects
@@ -28,17 +20,6 @@ vman() {
   fi
 }
 
-function codelinecount() {
-  [ -z $1 ] && exit 0
-  find . -name $1|xargs cat|grep -x -v '^\s*//.*$'| wc -l
-}
-
-
-function commentlinecount() {
-  [ -z $1 ] && exit 0
-  find . -name $1|xargs cat|grep -x '^\s*//.*$'| wc -l
-}
-
 function build-module() {
 	[ -f "./VERSION" ] && VERSION=`cat ./VERSION` || VERSION="0.1"
 	BUILD=`date +%d.%m.%Y@%H:%M`
@@ -46,22 +27,36 @@ function build-module() {
 	CURDIR=`pwd`
 	TARGET=`basename "$CURDIR"`
 
-	go build -ldflags "-X bitbucket.org/crutches-n-bikes/common/module.version=$VERSION -X bitbucket.org/crutches-n-bikes/common/module.build=$BUILD -X bitbucket.org/crutches-n-bikes/common/module.builder=$HOST" -v -a
+  go build -ldflags "-X bitbucket.org/crutches-n-bikes/common/module.version=$VERSION -X bitbucket.org/crutches-n-bikes/common/module.build=$BUILD -X bitbucket.org/crutches-n-bikes/common/module.builder=$HOST" -v -a
 
-	if [ $? -eq 0 ]; then
-		goupx --strip-binary $TARGET
+  if [ $? -eq 0 ]; then
+    goupx --strip-binary $TARGET
 	fi
 }
 
 function build-module-debug() {
 	[ -f "./VERSION" ] && VERSION=`cat ./VERSION` || VERSION="0.1"
-	BUILD=`date +%d.%m.%Y@%H:%M`
-	HOST=`whoami`@`hostname`
+  BUILD=`date +%d.%m.%Y@%H:%M`
+  HOST=`whoami`@`hostname`
 
-	go build -ldflags "-X bitbucket.org/crutches-n-bikes/common/module.release=debug -X bitbucket.org/crutches-n-bikes/common/module.version=$VERSION -X bitbucket.org/crutches-n-bikes/common/module.build=$BUILD -X bitbucket.org/crutches-n-bikes/common/module.builder=$HOST" -v -a
+  go build -ldflags "-X bitbucket.org/crutches-n-bikes/common/module.release=debug -X bitbucket.org/crutches-n-bikes/common/module.version=$VERSION -X bitbucket.org/crutches-n-bikes/common/module.build=$BUILD -X bitbucket.org/crutches-n-bikes/common/module.builder=$HOST" -v -a
 }
 
 function test-module() {
-	go test -cover -test.v -ginkgo.v
+  go test -cover -test.v -ginkgo.v
+}
+
+function grb() {
+  b=$1
+  shift
+  git up
+  git rebase origin/$b $@
+}
+
+function grh() {
+  git up
+  c=`git rev-parse --abbrev-ref HEAD`
+  b=${1:-$c}
+  git reset --hard origin/$b
 }
 
