@@ -29,5 +29,12 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
+# ASDF Config
+# Global
+[ -f /usr/local/opt/asdf/asdf.sh ] && . /usr/local/opt/asdf/asdf.sh
+[ -f /usr/local/etc/bash_completion.d/asdf.bash ] && . /usr/local/etc/bash_completion.d/asdf.bash
+# Local
+[ -f ~/.asdf/asdf.sh ] && . ~/.asdf/asdf.sh
+[ -f ~/.asdf/completions/asdf.bash ] && . ~/.asdf/completions/asdf.bash
 
 export PATH=~/.local/bin:$PATH
