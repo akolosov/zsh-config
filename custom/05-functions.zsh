@@ -42,21 +42,3 @@ function build-module-debug() {
   go build -ldflags "-X bitbucket.org/crutches-n-bikes/common/module.release=debug -X bitbucket.org/crutches-n-bikes/common/module.version=$VERSION -X bitbucket.org/crutches-n-bikes/common/module.build=$BUILD -X bitbucket.org/crutches-n-bikes/common/module.builder=$HOST" -v -a
 }
 
-function test-module() {
-  go test -cover -test.v -ginkgo.v
-}
-
-function grb() {
-  b=$1
-  shift
-  git up
-  git rebase origin/$b $@
-}
-
-function grh() {
-  git up
-  c=`git rev-parse --abbrev-ref HEAD`
-  b=${1:-$c}
-  git reset --hard origin/$b
-}
-
