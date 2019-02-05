@@ -37,3 +37,4 @@ alias bm='build-module'
 alias bmd='build-module-debug'
 alias tm='test-module'
 
+alias mc='LC_ALL=ru_RU.UTF-8 mc'

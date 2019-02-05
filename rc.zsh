@@ -25,7 +25,7 @@ USE_ZKBD="false"
 
 # Which plugins would you like to load? (plugins can be found in ~/.zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git github git-extras git-flow go autoenv brew brew-cask rails debian ruby rvm rake bundler gem extract)
+plugins=(git github git-extras git-flow go autoenv brew brew-cask rails ruby rvm rake bundler gem extract)
 
 source $ZSH/configure.zsh
 
